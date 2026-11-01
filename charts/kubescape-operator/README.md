@@ -69,6 +69,8 @@ The call goes through kube-apiserver with the agent's own token, and storage che
 - `kubescape-mcp-reader`: call the endpoint, read vulnerability manifests and configuration scans
 - `kubescape-mcp-runtime-reader`: read container profiles and SBOMs (what containers run and every package in an image)
 
+The tools depend on the storage version. The chart's default (v0.0.378) serves the vulnerability tools: `list_vulnerability_manifests`, `list_vulnerabilities_in_manifest` and `list_vulnerability_matches_for_cve`. `list_sboms` and `list_sbom_packages` come with v0.0.380, and the configuration-scan and container-profile tools with later releases. The two roles already cover them, so the RoleBindings stay the same when storage is upgraded.
+
 Image-level vulnerability manifests and SBOMs are stored in the Kubescape namespace, workload scans in the workload's namespace. For an agent with the ServiceAccount `kagent/agent`:
 
 ```
